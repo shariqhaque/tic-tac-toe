@@ -10,13 +10,15 @@ import java.util.Set;
 public class TicTacToe {
     private BoardState boardState;
 
-    public TicTacToe(int dimension) {
-        initializeBoard(dimension);
+    public TicTacToe(int dimension, char player1, char player2) {
+        initializeBoard(dimension,player1,player2);
     }
 
-    private void initializeBoard(int dimension) {
+    private void initializeBoard(int dimension, char player1, char player2) {
         this.boardState = new BoardState();
         this.boardState.setBoardDimension(dimension);
+        this.boardState.setFirstPlayer(player1);
+        this.boardState.setSecondPlayer(player2);
         this.boardState.initializeBoard();
     }
 
@@ -29,15 +31,11 @@ public class TicTacToe {
         for (int i = 0; i < this.boardState.getBoardDimension(); i++) {
             characters.add(this.boardState.getBoard()[i][i]);
         }
-        if (characters.size() == 1 && !characters.contains('-')) {
-            return true;
-        }
-        return false;
+        return characters.size() == 1 && !characters.contains('-');
     }
 
 
     private boolean checkRowsColumns(boolean checkRows) {
-        this.boardState.getBoard();
         Set<Character> characters = new HashSet<>();
         for (int i = 0; i < this.boardState.getBoardDimension(); i++) {
             for (int j = 0; j < this.boardState.getBoardDimension(); j++) {
@@ -55,9 +53,9 @@ public class TicTacToe {
     }
 
     public boolean placeMark(int row, int col) {
-        if (row >= 0 && row < this.boardState.getBoardDimension() && row >= 0 && row < this.boardState.getBoardDimension()) {
+        if (row >= 0 && row < this.boardState.getBoardDimension() && col >= 0 && col < this.boardState.getBoardDimension()) {
             if (this.boardState.getBoard()[row][col] == '-') {
-                this.boardState.getBoard()[row][col] = this.boardState.getCurrentPLayer();
+                this.boardState.getBoard()[row][col] = this.boardState.getCurrentPlayer();
                 return true;
             }
         }
@@ -77,4 +75,7 @@ public class TicTacToe {
     }
 
 
+    public boolean isComputerTurn() {
+        return this.boardState.getCurrentPlayer() == this.boardState.getComputer();
+    }
 }

@@ -25,14 +25,18 @@ public class BoardState {
                 board[i][j] = '-';
             }
         }
+
+        this.currentPlayer = this.firstPlayer;
     }
 
     public void changePlayer() {
         if(currentPlayer == firstPlayer){
             currentPlayer = secondPlayer;
+        }else if(currentPlayer == secondPlayer){
+            currentPlayer = computer;
+        }else {
+            currentPlayer=firstPlayer;
         }
-
-        //currentPlayer = currentPlayer == firstPlayer ? secondPlayer : currentPlayer == secondPlayer ? computer
-    }
+ }
 
 }
