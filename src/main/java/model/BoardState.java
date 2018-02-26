@@ -16,6 +16,8 @@ public class BoardState {
     private char secondPlayer;
     private char computer='C';
 
+
+
     public void initializeBoard() {
         board = new char[boardDimension][boardDimension];
         for (int i = 0; i < boardDimension; i++) {
